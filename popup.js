@@ -36,11 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
     console.error("Error during setUpAuth:", error);
     document.getElementById("status").textContent = "Auth error: " + error;
 
-    // Se esiste un bottone per il login, simuliamo il click
-    const loginButton = document.getElementById("apple-sign-in-button");
-    if (loginButton) {
-    console.log("Simulazione del click sul bottone di login");
-    loginButton.click();
-    }
+
 
 });
