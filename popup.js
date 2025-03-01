@@ -24,7 +24,17 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   console.log("CloudKit configured.");
   const container = CloudKit.getDefaultContainer();
-  console.log("Avvio login automatico...");
+
+    container.setUpAuth().then(function(user) {
+    console.log("Initial setUpAuth result:", user);
+    if (user) {
+      document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
+    } else {
+      document.getElementById("status").textContent = "Not signed in";
+    }
+  }).catch(function(error) {
+    console.error("Error during setUpAuth:", error);
+    document.getElementById("status").textContent = "Auth error: " + error;
 
   document.addEventListener("DOMContentLoaded", () => {
     // Se esiste un bottone per il login, simuliamo il click
