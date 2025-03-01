@@ -23,9 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }]
   });
   console.log("CloudKit configured.");
-  const container = CloudKit.getDefaultContainer();
 
-    container.setUpAuth().then(function(user) {
+  const container = CloudKit.getDefaultContainer();
+  console.log("Default container retrieved:", container);
+
+  // Check initial authentication status.
+  container.setUpAuth().then(function(user) {
     console.log("Initial setUpAuth result:", user);
     if (user) {
       document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
@@ -35,7 +38,22 @@ document.addEventListener("DOMContentLoaded", function() {
   }).catch(function(error) {
     console.error("Error during setUpAuth:", error);
     document.getElementById("status").textContent = "Auth error: " + error;
+  });
 
-
+  // Attach a click handler to trigger interactive sign-in.
+  document.getElementById("signInButton").addEventListener("click", function() {
+    console.log("Sign in button clicked.");
+    container.setUpAuth({ interactive: true }).then(function(user) {
+      console.log("Interactive sign in result:", user);
+      if (user) {
+        document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
+      } else {
+        document.getElementById("status").textContent = "Sign in cancelled or no user returned.";
+      }
+    }).catch(function(error) {
+      console.error("Error during interactive sign in:", error);
+      document.getElementById("status").textContent = "Sign in error: " + error;
+    });
+  });
 
 });
