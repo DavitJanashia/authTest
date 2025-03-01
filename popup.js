@@ -23,21 +23,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }]
   });
   console.log("CloudKit configured.");
-
   const container = CloudKit.getDefaultContainer();
-  console.log("Default container retrieved:", container);
+  console.log("Avvio login automatico...");
 
-  // Check initial authentication status.
-  container.setUpAuth().then(function(user) {
-    console.log("Initial setUpAuth result:", user);
-    if (user) {
-      document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
-    } else {
-      document.getElementById("status").textContent = "Not signed in";
-    }
-  }).catch(function(error) {
-    console.error("Error during setUpAuth:", error);
-    document.getElementById("status").textContent = "Auth error: " + error;
+  // Avvia il login interattivo automaticamente
+  container.setUpAuth({ interactive: true }).then(user => {
+    console.log("Login avvenuto con successo:", user);
+    window.parent.postMessage({ type: "AUTH_SUCCESS", userData: user }, "*");
+  }).catch(error => {
+    console.error("Errore nel login:", error);
+    window.parent.postMessage({ type: "AUTH_ERROR", error: error.message }, "*");
   });
 
 
