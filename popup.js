@@ -26,14 +26,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const container = CloudKit.getDefaultContainer();
   console.log("Avvio login automatico...");
 
-  // Avvia il login interattivo automaticamente
-  container.setUpAuth({ interactive: true }).then(user => {
-    console.log("Login avvenuto con successo:", user);
-    window.parent.postMessage({ type: "AUTH_SUCCESS", userData: user }, "*");
-  }).catch(error => {
-    console.error("Errore nel login:", error);
-    window.parent.postMessage({ type: "AUTH_ERROR", error: error.message }, "*");
+  document.addEventListener("DOMContentLoaded", () => {
+    // Se esiste un bottone per il login, simuliamo il click
+    const loginButton = document.getElementById("appleLoginButton");
+    if (loginButton) {
+    console.log("Simulazione del click sul bottone di login");
+    loginButton.click();
+    }
   });
-
 
 });
