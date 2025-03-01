@@ -27,18 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const container = CloudKit.getDefaultContainer();
   console.log("Default container retrieved:", container);
 
-  // Check initial authentication status.
-  container.setUpAuth().then(function(user) {
-    console.log("Initial setUpAuth result:", user);
-    if (user) {
-      document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
-    } else {
-      document.getElementById("status").textContent = "Not signed in";
-    }
-  }).catch(function(error) {
-    console.error("Error during setUpAuth:", error);
-    document.getElementById("status").textContent = "Auth error: " + error;
-  });
+
 
 
 });
