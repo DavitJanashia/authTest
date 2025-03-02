@@ -1,4 +1,7 @@
+document.cookie = "name=value; Secure; SameSite=None; path=/";
+
 document.addEventListener("DOMContentLoaded", function() {
+  
   console.log("DOM fully loaded and parsed.");
 
   // Configure CloudKit with your container settings.
