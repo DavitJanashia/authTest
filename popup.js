@@ -69,6 +69,9 @@ function demoSetUpAuth() {
       } else {
         gotoUnauthenticatedState();
       }
+    })
+   .catch(function(error) {
+      console.error('Error during authentication:', error);
     });
 }
 
