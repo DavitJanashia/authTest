@@ -27,18 +27,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const container = CloudKit.getDefaultContainer();
   console.log("Default container retrieved:", container);
-var userIdentity = CloudKit.UserIdentity
-container.setUpAuth().then(function(userIdentity) {
-    if (userIdentity) {
-        // The user is authenticated
-        console.log("User record name:", userIdentity.userRecordName);
+
+  function gotoAuthenticatedState(userIdentity) {
+    var name = userIdentity.nameComponents;
+    if(name) {
+      displayUserName(name.givenName + ' ' + name.familyName);
     } else {
-        // No user is signed in; the sign-in button will be displayed
-        console.log("User is not signed in");
+      displayUserName('User record name: ' + userIdentity.userRecordName);
     }
-}).catch(function(error) {
-    console.error("Authentication error:", error);
-});
+    container
+      .whenUserSignsOut()
+      .then(gotoUnauthenticatedState);
+  }
+  function gotoUnauthenticatedState(error) {
+
+    if(error && error.ckErrorCode === 'AUTH_PERSIST_ERROR') {
+      showDialogForPersistError();
+    }
+
+    displayUserName('Unauthenticated User');
+    container
+      .whenUserSignsIn()
+      .then(gotoAuthenticatedState)
+      .catch(gotoUnauthenticatedState);
+  }
+
+  // Check a user is signed in and render the appropriate button.
+  return container.setUpAuth()
+    .then(function(userIdentity) {
+
+      // Either a sign-in or a sign-out button was added to the DOM.
+
+      // userIdentity is the signed-in user or null.
+      if(userIdentity) {
+        gotoAuthenticatedState(userIdentity);
+      } else {
+        gotoUnauthenticatedState();
+      }
+    });
 
 
 });
