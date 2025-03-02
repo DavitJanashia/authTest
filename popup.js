@@ -28,16 +28,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const container = CloudKit.getDefaultContainer();
   console.log("Default container retrieved:", container);
   // Check initial authentication status.
-  container.setUpAuth().then(function(user) {
-    console.log("Initial setUpAuth result:", user);
-    if (user) {
-      document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
+var myContainer = CloudKit.getDefaultContainer();
+
+myContainer.setUpAuth().then(function(userIdentity) {
+    if (userIdentity) {
+        // The user is authenticated
+        console.log("User record name:", userIdentity.userRecordName);
     } else {
-      document.getElementById("status").textContent = "Not signed in";
+        // No user is signed in; the sign-in button will be displayed
+        console.log("User is not signed in");
     }
-  }).catch(function(error) {
-    console.error("Error during setUpAuth:", error);
-    document.getElementById("status").textContent = "Auth error: " + error;
-  });
+}).catch(function(error) {
+    console.error("Authentication error:", error);
+});
+
 
 });
