@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
       environment: 'development' // Use 'production' when you're ready.
     }]
   });
+  
   console.log("CloudKit configured.");
 
   const container = CloudKit.getDefaultContainer();
