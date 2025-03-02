@@ -43,19 +43,4 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   console.log("CloudKit configured");
 
-  // Se la libreria supporta il rendering esplicito, forzalo
-  if (CloudKit.UI && typeof CloudKit.UI.renderSignInButton === 'function') {
-    console.log("Forcing render of sign-in and sign-out buttons");
-    CloudKit.UI.renderSignInButton({
-      id: 'apple-sign-in-button',
-      theme: 'black'
-    });
-    CloudKit.UI.renderSignOutButton({
-      id: 'apple-sign-out-button',
-      theme: 'black'
-    });
-    console.log("Buttons rendered");
-  } else {
-    console.log("CloudKit.UI.renderSignInButton not available");
-  }
 });
