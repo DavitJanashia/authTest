@@ -26,17 +26,26 @@ document.addEventListener("DOMContentLoaded", function() {
   const container = CloudKit.getDefaultContainer();
   console.log("Default container retrieved:", container);
 
-  // Se l'auto-render non avviene, forza il rendering del bottone:
-  if (CloudKit.UI && typeof CloudKit.UI.renderSignInButton === 'function') {
-    CloudKit.UI.renderSignInButton({
-      id: 'apple-sign-in-button',
-      theme: 'black'
-    });
-    CloudKit.UI.renderSignOutButton({
-      id: 'apple-sign-out-button',
-      theme: 'black'
-    });
-  }
+
+  CloudKit.configure({
+  containers: [{
+    containerIdentifier: 'iCloud.me.tuo.container',
+    apiTokenAuth: {
+      apiToken: 'YOUR_API_TOKEN',
+      persist: true,
+      signInButton: {
+        id: 'apple-sign-in-button',
+        theme: 'black'
+      },
+      signOutButton: {
+        id: 'apple-sign-out-button',
+        theme: 'black'
+      }
+    },
+    environment: 'development'
+  }]
+});
+
 
   // Puoi aggiungere ulteriori controlli per la visualizzazione dello stato o per il login.
 });
