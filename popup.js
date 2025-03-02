@@ -27,10 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const container = CloudKit.getDefaultContainer();
   console.log("Default container retrieved:", container);
-  // Check initial authentication status.
-var myContainer = CloudKit.getDefaultContainer();
-
-myContainer.setUpAuth().then(function(userIdentity) {
+var userIdentity = CloudKit.UserIdentity
+container.setUpAuth().then(function(userIdentity) {
     if (userIdentity) {
         // The user is authenticated
         console.log("User record name:", userIdentity.userRecordName);
