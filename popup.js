@@ -25,8 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
   
   console.log("CloudKit configured.");
 
-  const container = CloudKit.getDefaultContainer();
-  console.log("Default container retrieved:", container);
+function demoSetUpAuth() {
+
+  // Get the container.
+  var container = CloudKit.getDefaultContainer();
 
   function gotoAuthenticatedState(userIdentity) {
     var name = userIdentity.nameComponents;
@@ -65,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function() {
         gotoUnauthenticatedState();
       }
     });
+}
 
 
+
+demoSetUpAuth() 
+  
 });
