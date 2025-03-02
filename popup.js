@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     containers: [{
       containerIdentifier: 'iCloud.me.davit.janashia.authTest2', // Replace with your container identifier.
       apiTokenAuth: {
-        apiToken: '70d8d209065ddd559f7369dbac26af4c909ef0ae1c1e234c67f49d6adaa31833', // Replace with your API token.
+        apiToken: '01880ccd50a504f48fe8a67feae7d8b1f136aa97e2da4db33c89d66931defb9c', // Replace with your API token.
         persist: true, // This sets a cookie so that the auth persists.
         // (Optional) CloudKit can auto-render sign in/out buttons if you have corresponding elements:
         signInButton: {
