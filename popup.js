@@ -40,19 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
     console.error("Error during setUpAuth:", error);
     document.getElementById("status").textContent = "Auth error: " + error;
   });
-  document.getElementById("signInButton").addEventListener("click", function() {
-    console.log("Sign in button clicked.");
-    container.setUpAuth({ interactive: true }).then(function(user) {
-      console.log("Interactive sign in result:", user);
-      if (user) {
-        document.getElementById("status").textContent = "Signed in: " + user.userRecordName;
-      } else {
-        document.getElementById("status").textContent = "Sign in cancelled or no user returned.";
-      }
-    }).catch(function(error) {
-      console.error("Error during interactive sign in:", error);
-      document.getElementById("status").textContent = "Sign in error: " + error;
-    });
-  });
+
 
 });
